@@ -1,0 +1,777 @@
+/* ==========================================================================
+   FRANCOIS SHOES & CLOTHES · Storefront
+   ========================================================================== */
+
+/* ----- Design tokens (LIGHT) ----- */
+:root{
+  --bg:#F5F6F8;
+  --card:#FFFFFF;
+  --ink:#0F172A;
+  --mute:#5B6475;
+  --line:#E3E7EE;
+  --brand:#0F5C4D;          /* green */
+  --brand-2:#0A4438;        /* dark green */
+  --on-brand:#FFFFFF;
+  --accent:#F5B400;         /* yellow */
+  --soft:#FFF6D8;
+  --momo:#F5B400;
+  --momo-line:#F2D86B;
+  --wa:#1C9A52;
+  --r:14px;
+  --sh:0 1px 2px rgba(15,92,77,.06),0 10px 28px rgba(15,23,42,.07);
+  --sh-lg:0 20px 60px rgba(0,0,0,.18);
+  --focus:0 0 0 3px rgba(245,180,0,.30);
+  color-scheme:light;
+}
+
+/* ----- Dark mode ----- */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#111111;
+    --card:#1B1B1B;
+    --ink:#F5F5F5;
+    --mute:#B8B8B8;
+    --line:#333333;
+    --brand:#F5B400;
+    --brand-2:#D99B00;
+    --on-brand:#111111;
+    --soft:#30270D;
+    --momo:#221D08;
+    --momo-line:#5C4C14;
+    --sh:0 10px 28px rgba(0,0,0,.4);
+    color-scheme:dark;
+  }
+  :root:not([data-theme="light"]) .wm{filter:invert(1)}
+}
+
+:root[data-theme="dark"]{
+  --bg:#111111;
+  --card:#1B1B1B;
+  --ink:#F5F5F5;
+  --mute:#B8B8B8;
+  --line:#333333;
+  --brand:#F5B400;
+  --brand-2:#D99B00;
+  --on-brand:#111111;
+  --soft:#30270D;
+  --momo:#221D08;
+  --momo-line:#5C4C14;
+  --sh:0 10px 28px rgba(0,0,0,.4);
+  color-scheme:dark;
+}
+:root[data-theme="dark"] .wm{filter:invert(1)}
+
+/* ----- Reset / base ----- */
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font:400 16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;line-height:1.15;letter-spacing:-.015em}
+[hidden]{display:none!important}
+::selection{background:color-mix(in srgb,var(--brand) 25%,transparent)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* ==========================================================================
+   0. BACK TO ADMIN BUTTON
+   ========================================================================== */
+/* ===== BACK TO ADMIN (hidden by default — shown only when admin returns from store) ===== */
+#back-admin {
+  display: none !important;
+  position: fixed;
+ right: 12px;
+  
+  z-index: 9999;
+  background: #0F5C4D;
+  color: #fff;
+  border: 0;
+  padding: 9px;
+  border-radius: 6px;
+  font: 700 14px 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  transition: background .2s;
+}
+#back-admin.on {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+}
+#back-admin:hover {
+  background: #0b463a;
+}
+/* ==========================================================================
+   1. AMATANGAZO (Bonus / Promo)
+   ========================================================================== */
+.bonus{
+  background:var(--accent);color:#1B1305;
+  display:flex;align-items:center;gap:10px;
+  padding:0 16px;height:40px;
+  font-weight:700;font-size:14.5px;
+}
+.bonus .mq{overflow:hidden;flex:1;white-space:nowrap}
+.bonus .track{display:inline-flex;animation:mq linear infinite}
+.bonus .track span{padding-right:70px}
+.bonus:hover .track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+.promo{
+  display:block;
+  padding:10px 16px;
+  text-align:center;
+  background:var(--brand);
+  color:#fff;
+  font-size:13px;
+  line-height:1.6;
+  white-space:normal;
+  word-break:break-word;
+}
+.promo a{color:var(--accent);text-decoration:underline;font-weight:800}
+.promo b{color:var(--accent)}
+.promo small{color:#d0e8e0;font-size:12px}
+
+@media (max-width:480px){
+  .promo{font-size:12px;padding:8px 10px;line-height:1.5}
+  .promo small{font-size:11px}
+}
+
+/* ==========================================================================
+   2. UMUTWE (Header) + NAVIGATION + LOGO
+   ========================================================================== */
+header{
+  position:sticky;
+  top:env(safe-area-inset-top,0px);
+  z-index:20;
+  background:color-mix(in srgb,var(--card) 92%,transparent);
+  backdrop-filter:saturate(1.4) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.bar{display:flex;align-items:center;gap:10px;height:68px}
+
+.logo{
+  margin-right:auto;
+  display:flex;align-items:center;gap:12px;
+  min-width:0;
+  white-space:nowrap;
+  text-decoration:none;
+}
+.logo img{
+  display:block;
+  width:40px;
+  height:40px;
+  flex:0 0 auto;
+  object-fit:cover;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  background:#fff;
+  padding:2px;
+}
+
+.logo-text{
+  display:inline-block;
+  font-family:'Plus Jakarta Sans','Inter',sans-serif;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--ink);
+  line-height:1.3;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:color .3s ease,transform .3s ease;
+}
+.logo-text b{
+  color:var(--accent);
+  font-size:30px;
+  font-weight:900;
+  margin-left:2px;
+  text-shadow:0 2px 5px rgba(245,180,0,.4);
+}
+.logo-text:hover{color:var(--accent);transform:translateY(-2px)}
+
+@media (max-width:600px){
+  .logo{gap:8px}
+  .logo img{width:34px;height:34px}
+  .logo-text{
+    font-size:14px;
+    letter-spacing:.3px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width:150px;
+    line-height:1.15;
+  }
+  .logo-text b{font-size:20px}
+}
+
+.ib{
+  height:42px;min-width:42px;
+  border-radius:12px;border:1px solid var(--line);
+  background:var(--card);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:0 14px;
+  font-weight:600;font-size:14.5px;
+  transition:border-color .15s,background .15s,transform .15s;
+}
+.ib:hover{border-color:var(--brand);transform:translateY(-1px)}
+select.ib{appearance:none;-webkit-appearance:none;text-align:center;padding:0 12px}
+.ib .n{
+  background:var(--accent);color:#1B1305;
+  border-radius:99px;font-size:12px;
+  min-width:21px;height:21px;
+  display:grid;place-items:center;padding:0 5px;
+  font-weight:800;
+}
+
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{
+  padding:9px 14px;border-radius:10px;
+  font-weight:600;font-size:13.5px;letter-spacing:.03em;
+  color:var(--mute);
+  transition:background .15s,color .15s;
+}
+.nav a:hover{background:var(--soft);color:var(--brand)}
+.nav a.on{background:var(--ink);color:var(--bg)}
+
+/* ==========================================================================
+   3. HERO + TRUST
+   ========================================================================== */
+.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;margin:24px 0 16px}
+.hero .l{
+  background:radial-gradient(120% 150% at 0% 0%,#1A3D34 0%,var(--brand) 55%,var(--brand-2) 100%);
+  color:#fff;
+  border-radius:24px;padding:46px 40px;
+  display:flex;flex-direction:column;justify-content:center;gap:16px;
+  position:relative;overflow:hidden;
+  box-shadow:var(--sh);
+}
+.hero .l::after{
+  content:"";position:absolute;right:-70px;top:-70px;
+  width:240px;height:240px;border-radius:50%;
+  background:rgba(245,180,0,.2);z-index:0;
+}
+.hero .l>*{position:relative;z-index:1}
+.hero h1{font-size:clamp(30px,4.6vw,54px);font-weight:800;position:relative}
+.hero p{max-width:44ch;opacity:.9;font-size:17px;position:relative}
+.cta{
+  align-self:flex-start;
+  background:var(--accent);color:#1B1305;
+  border:0;font-weight:700;
+  padding:14px 28px;border-radius:12px;
+  position:relative;
+  transition:transform .15s,filter .15s,box-shadow .15s;
+}
+.cta:hover{filter:brightness(1.06);transform:translateY(-1px);box-shadow:0 8px 20px rgba(245,180,0,.35)}
+
+.hero .r{
+  background:transparent;
+  border:none;
+  border-radius:24px;
+  display:grid;place-items:center;
+  min-height:300px;
+  overflow:hidden;
+  position:relative;
+}
+.hero .r img,.hero .r picture,.hero .r video{
+  display:block;max-width:100%;height:auto;object-fit:contain;
+}
+.hero .r img{max-height:520px}
+
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:6px}
+.trust div{
+  display:flex;gap:12px;align-items:center;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:14px 16px;
+  font-weight:600;font-size:14.5px;
+  box-shadow:var(--sh);
+  transition:transform .15s,box-shadow .15s;
+}
+.trust div:hover{transform:translateY(-1px);box-shadow:var(--sh-lg)}
+.trust span{font-size:22px}
+
+/* ==========================================================================
+   4. TOOLS (Search + Chips)
+   ========================================================================== */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:26px 0 16px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips button{
+  border:1px solid var(--line);
+  background:var(--card);
+  padding:9px 20px;border-radius:99px;
+  font-weight:600;font-size:14.5px;
+  white-space:nowrap;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.chips button:hover{border-color:var(--brand)}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tools input,.tools select{
+  height:44px;border-radius:12px;border:1px solid var(--line);
+  background:var(--card);padding:0 14px;min-width:0;
+}
+.tools input:focus,.f input:focus,.f select:focus{
+  border-color:var(--brand);
+  outline:none;
+  box-shadow:var(--focus);
+}
+
+/* ==========================================================================
+   5. IBICURUZWA (Grid)
+   ========================================================================== */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.p{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;
+  text-align:left;padding:0;
+  display:flex;flex-direction:column;
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+.p:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--sh);
+  border-color:color-mix(in srgb,var(--brand) 40%,var(--line));
+}
+.p .im{aspect-ratio:1;display:grid;place-items:center;position:relative;overflow:hidden}
+.p .im svg{width:70%}
+.p .im img{width:100%;height:100%;object-fit:cover}
+.p .t{padding:14px 16px 18px}
+.p h3{
+  font:600 15px/1.35 Inter,sans-serif;
+  letter-spacing:0;margin-bottom:6px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.pr{font-weight:700;color:var(--brand)}
+.pr s{color:var(--mute);font-weight:400;margin-left:8px;font-size:13px}
+.badge{
+  position:absolute;top:12px;left:12px;
+  background:var(--accent);color:#1B1305;
+  font-size:12px;font-weight:700;
+  padding:3px 10px;border-radius:99px;z-index:1;
+}
+.vb{
+  position:absolute;bottom:12px;left:12px;
+  background:rgba(15,23,42,.78);color:#fff;
+  font-size:12px;font-weight:600;
+  padding:3px 10px;border-radius:99px;z-index:1;
+}
+.empty{grid-column:1/-1;padding:48px 0;color:var(--mute);text-align:center}
+
+/* ==========================================================================
+   6. AMABUTO (Buttons)
+   ========================================================================== */
+.btn{
+  border:0;background:var(--brand);color:var(--on-brand);
+  font-weight:600;height:48px;border-radius:12px;
+  padding:0 22px;width:100%;
+  transition:filter .15s,transform .15s;
+}
+.btn:hover:not(:disabled){filter:brightness(1.08);transform:translateY(-1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.g{background:var(--wa);color:#fff}
+.btn.o{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn.o:hover:not(:disabled){border-color:var(--brand)}
+
+/* ==========================================================================
+   7. IDIRISHYA RY'IGICURUZWA (Dialog)
+   ========================================================================== */
+dialog{
+  border:0;border-radius:22px;padding:0;
+  width:calc(100% - 28px);max-width:800px;
+  background:var(--card);color:var(--ink);
+  max-height:92vh;overflow:auto;
+  box-shadow:var(--sh-lg);
+}
+dialog::backdrop{background:rgba(8,14,12,.62);backdrop-filter:blur(3px)}
+.pd{display:grid;grid-template-columns:1fr 1fr}
+.pd .im{display:grid;place-items:center;min-height:300px;overflow:hidden}
+.pd .im svg{width:76%}
+.pd .im img{width:100%;height:100%;object-fit:cover}
+.pd .in{padding:28px;display:flex;flex-direction:column;gap:16px}
+.pd h2{font-size:24px;font-weight:800}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opts button{
+  min-width:46px;height:42px;border-radius:10px;
+  border:1.5px solid var(--line);background:var(--bg);
+  padding:0 14px;font-weight:600;
+  transition:border-color .15s,background .15s,color .15s;
+}
+.opts button:hover{border-color:var(--brand)}
+.opts button[aria-pressed="true"]{border-color:var(--brand);background:var(--soft);color:var(--brand)}
+.opts#clr button{min-width:80px}
+.lbl{
+  font-size:13px;color:var(--mute);font-weight:600;
+  margin-bottom:8px;display:block;
+  text-transform:uppercase;letter-spacing:.04em;
+}
+
+/* ==========================================================================
+   8. AGASEKE (Cart Drawer)
+   ========================================================================== */
+.ov{position:fixed;inset:0;background:rgba(8,14,12,.55);z-index:35;display:none}
+.ov.on{display:block}
+
+.drawer{
+  position:fixed;inset:0 0 0 auto;
+  width:min(450px,100%);
+  background:var(--card);z-index:40;
+  transform:translateX(105%);
+  transition:transform .28s;
+  display:flex;flex-direction:column;
+  box-shadow:-12px 0 40px rgba(0,0,0,.25);
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.drawer:not(.on){box-shadow:none;visibility:hidden;transition:transform .28s,visibility 0s .28s}
+.drawer.on{transform:none;visibility:visible}
+
+.dh{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;border-bottom:1px solid var(--line);
+}
+.dh h2{font-size:19px}
+.db{flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+#cfull,#cempty,#citems{display:flex;flex-direction:column;gap:14px}
+
+.ci{display:flex;gap:12px;align-items:center}
+.ci .th{
+  width:62px;height:62px;border-radius:12px;
+  display:grid;place-items:center;flex:none;overflow:hidden;
+  background:var(--soft);
+}
+.ci .th svg{width:80%}
+.ci .th img{width:100%;height:100%;object-fit:cover}
+.ci .m{flex:1;font-size:14.5px;color:var(--mute)}
+.ci .m b{display:block;color:var(--ink)}
+.q{display:flex;align-items:center;gap:10px;font-weight:600}
+.q button{
+  width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--line);background:var(--bg);
+  transition:background .15s;
+}
+.q button:hover{background:var(--soft)}
+
+.row{display:flex;justify-content:space-between;font-size:15px;padding:3px 0}
+.row.tot{
+  font-weight:800;font-size:19px;
+  border-top:1px solid var(--line);
+  padding-top:12px;margin-top:6px;
+}
+
+.f{display:flex;flex-direction:column;gap:10px}
+.f input,.f select{
+  height:48px;border-radius:12px;
+  border:1px solid var(--line);background:var(--bg);
+  padding:0 14px;width:100%;
+}
+
+/* ==========================================================================
+   9. UBWISHYU (Payment Methods)
+   ========================================================================== */
+.momo{
+  background:linear-gradient(135deg,var(--brand) 0%,var(--brand-2) 100%);
+  color:#fff;
+  padding:16px;border-radius:14px;margin:14px 0;
+}
+.momo h3{color:#fff;margin:0 0 12px;font-size:16px}
+.pay-step{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start}
+.pay-num{
+  flex-shrink:0;width:28px;height:28px;border-radius:50%;
+  background:var(--accent);color:#1B1305;font-weight:800;
+  display:grid;place-items:center;font-size:14px;
+}
+.pay-step b{display:block;margin-bottom:6px;font-size:14px}
+
+.momo .code{
+  background:#fff;color:var(--brand);
+  padding:12px 14px;border-radius:10px;
+  font-family:'Courier New',monospace;font-weight:800;font-size:13px;
+  text-align:center;letter-spacing:0;
+  word-break:break-all;
+  user-select:all;cursor:pointer;
+  border:2px dashed var(--accent);
+}
+.momo .btn{
+  width:100%;border:0;border-radius:10px;padding:12px;
+  font-weight:700;font-size:14px;cursor:pointer;
+}
+.momo .btn.o{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.momo .btn.o:hover{background:rgba(255,255,255,.25)}
+.momo .pay-tel,.momo .btn.g{
+  background:var(--accent);color:#1B1305;text-decoration:none;
+  font-weight:800;padding:14px;border-radius:10px;font-size:15px;
+  transition:transform .15s;
+  display:block;text-align:center;
+}
+.momo .pay-tel:hover,.momo .btn.g:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(245,180,0,.4)}
+
+.pay-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.pay-opt{
+  background:rgba(255,255,255,.12);color:#fff;
+  border:2px solid rgba(255,255,255,.25);
+  border-radius:12px;padding:14px 10px;
+  font-weight:800;font-size:14px;
+  cursor:pointer;transition:all .15s;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.pay-opt:hover{background:rgba(255,255,255,.2)}
+.pay-opt[aria-pressed="true"]{
+  background:var(--accent);color:#1B1305;
+  border-color:var(--accent);
+  box-shadow:0 4px 12px rgba(245,180,0,.4);
+}
+.pay-opt[data-method="mm"][aria-pressed="true"]{
+  background:#00A651;color:#fff;
+  border-color:#00A651;
+  box-shadow:0 4px 12px rgba(0,166,81,.4);
+}
+
+#pay-name{
+  margin-top:8px;padding:10px;
+  background:rgba(255,255,255,.12);border-radius:10px;
+  font-size:13px;color:#fff;
+}
+#pay-name small{opacity:.8;display:block;margin-bottom:2px}
+#pay-name b{font-size:15px;color:var(--accent)}
+
+/* ==========================================================================
+   10. CHAT
+   ========================================================================== */
+.chb{
+  position:fixed;
+  right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  z-index:30;
+  background:var(--brand);color:var(--on-brand);
+  border:0;border-radius:99px;
+  height:54px;padding:0 22px;
+  font-weight:700;
+  box-shadow:0 10px 28px rgba(0,0,0,.4);
+  display:flex;gap:8px;align-items:center;
+  transition:filter .15s,transform .15s;
+}
+.chb:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.chb.n::after{
+  content:"";position:absolute;top:2px;right:2px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--accent);border:2px solid var(--bg);
+}
+
+.chp{
+  position:fixed;
+  right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));
+  width:min(380px,calc(100% - 24px));
+  height:min(540px,calc(100% - 90px));
+  background:var(--card);
+  border:1px solid var(--line);border-radius:20px;
+  z-index:50;display:none;flex-direction:column;overflow:hidden;
+  box-shadow:var(--sh-lg);
+}
+.chp.on{display:flex}
+.chh{
+  background:var(--brand);color:var(--on-brand);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 18px;
+}
+.chh button{background:none;border:0;color:inherit;font-size:18px}
+.cst{padding:20px;display:flex;flex-direction:column;gap:10px}
+.cst input,.cfm input{
+  height:46px;border-radius:12px;
+  border:1px solid var(--line);background:var(--bg);
+  padding:0 14px;width:100%;
+}
+#ct{display:flex;flex-direction:column;flex:1;min-height:0}
+.cl{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px}
+.cm{
+  max-width:84%;padding:10px 14px;border-radius:16px;
+  white-space:pre-wrap;word-break:break-word;font-size:15px;
+}
+.cm.a{background:var(--soft);align-self:flex-start;border-bottom-left-radius:4px}
+.cm.c{background:var(--brand);color:var(--on-brand);align-self:flex-end;border-bottom-right-radius:4px}
+.cm img{
+  max-width:200px;max-height:200px;border-radius:10px;
+  display:block;margin-top:4px;cursor:pointer;
+  transition:transform .15s,box-shadow .15s;
+}
+.cm img:hover{transform:scale(1.02);box-shadow:var(--sh)}
+.cm.a img{border:2px solid var(--line)}
+.cm.c img{border:2px solid var(--brand-2)}
+.cfm{
+  display:flex;gap:8px;padding:12px;
+  border-top:1px solid var(--line);align-items:center;
+}
+.cfm label{user-select:none;transition:background .15s}
+.cfm label:hover{background:var(--soft)}
+.cfm button{
+  width:48px;border:0;border-radius:12px;
+  background:var(--brand);color:var(--on-brand);
+}
+
+/* ==========================================================================
+   11. FOOTER
+   ========================================================================== */
+footer{
+  background:var(--ink);color:var(--bg);
+  padding:14px 0;font-size:14px;
+  text-align:center;
+}
+footer #ft{font-weight:600}
+footer #cr{color:var(--wa);margin-top:8px}
+footer a{text-decoration:underline;text-underline-offset:3px}
+
+/* ==========================================================================
+   12. WATERMARK + MADE-BY
+   ========================================================================== */
+.wm{
+  position:fixed;inset:0;z-index:2;pointer-events:none;user-select:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='380' height='230'><text x='190' y='115' text-anchor='middle' transform='rotate(-24 190 115)' font-family='Arial,Helvetica,sans-serif' font-size='22' font-weight='700' fill='black'>FRANCOIS SHOES &amp; CLOTHES</text></svg>");
+}
+
+/* ==========================================================================
+   13. SCROLLBAR
+   ========================================================================== */
+.cl::-webkit-scrollbar,.db::-webkit-scrollbar{width:8px}
+.cl::-webkit-scrollbar-thumb,.db::-webkit-scrollbar-thumb{background:#D5DCE8;border-radius:999px}
+.cl::-webkit-scrollbar-thumb:hover,.db::-webkit-scrollbar-thumb:hover{background:#BFC8D8}
+
+/* ==========================================================================
+   14. PAGES (SPA Router)
+   ========================================================================== */
+.page[hidden]{display:none !important}
+
+/* ==========================================================================
+   15. CONTACT + ABOUT
+   ========================================================================== */
+.contact{margin:40px 0}
+.contact-inner{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:24px;padding:40px;box-shadow:var(--sh);
+}
+.contact-badge{
+  display:inline-block;
+  background:var(--soft);color:var(--brand);
+  font-size:12.5px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;
+  padding:6px 14px;border-radius:99px;margin-bottom:16px;
+}
+.contact h2{
+  font-size:clamp(24px,3.4vw,36px);font-weight:800;
+  margin-bottom:12px;letter-spacing:-.02em;
+}
+.contact-lead{
+  color:var(--mute);font-size:17px;max-width:65ch;
+  margin-bottom:28px;line-height:1.6;
+}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+.contact-card{
+  background:var(--bg);border:1px solid var(--line);
+  border-radius:16px;padding:20px;
+  text-decoration:none;color:inherit;
+  transition:transform .15s,box-shadow .15s,border-color .15s;
+  display:block;
+}
+.contact-card:hover{
+  transform:translateY(-2px);box-shadow:var(--sh);
+  border-color:color-mix(in srgb,var(--brand) 30%,var(--line));
+}
+.contact-ico{font-size:26px;display:block;margin-bottom:8px}
+.contact-card h3{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--ink)}
+.contact-card p{font-size:14.5px;color:var(--mute);line-height:1.55;word-break:break-word}
+
+.about{margin:40px 0}
+.about-inner{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:24px;padding:40px;box-shadow:var(--sh);
+}
+.about-badge{
+  display:inline-block;
+  background:var(--soft);color:var(--brand);
+  font-size:12.5px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;
+  padding:6px 14px;border-radius:99px;margin-bottom:16px;
+}
+.about h2{
+  font-size:clamp(24px,3.4vw,36px);font-weight:800;
+  margin-bottom:12px;letter-spacing:-.02em;
+}
+.about-lead{color:var(--mute);font-size:17px;max-width:65ch;margin-bottom:28px;line-height:1.6}
+.about-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;margin-bottom:28px;
+}
+.about-card{
+  background:var(--bg);border:1px solid var(--line);
+  border-radius:16px;padding:20px;
+}
+.about-ico{font-size:26px;display:block;margin-bottom:8px}
+.about-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.about-card p{font-size:14.5px;color:var(--mute);line-height:1.55}
+.about-steps h3{font-size:18px;font-weight:800;margin-bottom:12px}
+.about-steps ol{padding-left:20px;display:flex;flex-direction:column;gap:8px;color:var(--mute);font-size:15px}
+
+/* ==========================================================================
+   16. RESPONSIVE
+   ========================================================================== */
+@media (max-width:980px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .hero{grid-template-columns:1fr}
+  .hero .r{min-height:350px;margin-top:20px}
+}
+@media (max-width:700px){
+  .nav{display:none}
+  .contact-inner,.about-inner{padding:24px}
+  .contact-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .logo-text{font-size:13px;letter-spacing:.2px}
+  .logo img{width:38px;height:38px}
+  .bar{gap:8px;min-width:0}
+  .ib{padding:0 11px;flex-shrink:0}
+
+  .hero .r{display:flex;min-height:320px;margin-top:16px}
+  .hero .r img{max-height:400px}
+
+  .made .long{display:none}
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .pd{grid-template-columns:1fr}
+  .pd .im{min-height:230px}
+  .trust{grid-template-columns:1fr}
+  .hero .l{
+    background:radial-gradient(120% 150% at 0% 0%,#1A3D34 0%,var(--brand) 55%,var(--brand-2) 100%);
+    padding:32px 24px;
+  }
+  .chips{flex:1 1 100%}
+  .tools input[type=search]{flex:1}
+  .p .t{padding:12px}
+}
+@media (max-width:460px){
+  .trust{grid-template-columns:1fr}
+  .grid{gap:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  .bonus .track{animation:none}
+  .bonus .mq{white-space:normal;overflow:auto}
+  .drawer{transition:none}
+}
+
+/* ==========================================================================
+   17. BOOT BANNER
+   ========================================================================== */
+.boot{
+  background:#FFF4CE;color:#5B4300;
+  padding:10px 16px;
+  font:600 14px/1.4 system-ui,sans-serif;
+  border-bottom:1px solid #E8A317;
+  position:relative;z-index:50;
+}
+.boot a{text-decoration:underline;color:inherit}

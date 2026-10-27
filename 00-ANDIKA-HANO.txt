@@ -1,0 +1,47 @@
+ONLINE SHOP — verisiyo yuzuye ya XAMPP (PHP + MySQL)
+Uwakoze urubuga: Dominique Xavier
+
+ICYO UBU BUGUBO BURIMO
+Ubu bubiko ("online_shop") BUSHOBORA GUKORESHWA UKO BURI: ni urubuga rwuzuye (iduka, admin, API ya PHP, database).
+Ntugire ububiko "python" cyangwa "static" ushakisha — ntibuhari hano. Ibyose biri hano hamwe.
+
+INTAMBWE 6 (muminota 5)
+
+1) Fungura XAMPP Control Panel, ukande Start kuri "Apache" na "MySQL".
+
+2) Shyira UBU BUGUBO BWOSE ("online_shop") muri:  C:\xampp\htdocs\
+   Bigomba kuba bimeze gutya:  C:\xampp\htdocs\online_shop\api.php
+                               C:\xampp\htdocs\online_shop\index.html
+                               C:\xampp\htdocs\online_shop\admin.html
+   (api.php na index.html biri HAMWE imbere muri online_shop — nta gafolder hagati.)
+   Niba utabona dosiye ".htaccess", muri Windows Explorer fungura View -> Show -> Hidden items.
+
+3) Database: fungura http://localhost/phpmyadmin
+   - Kanda "New", wandike izina:  online_shop   hanyuma "Create".
+   - Hitamo online_shop ibumoso, ukande "Import", uhitemo dosiye  schema.sql  (iri muri ubu bubiko), ukande "Go".
+
+4) Fungura config.php muri VS Code cyangwa Notepad, urebe ko ari ibi:
+      DB_HOST = 'localhost'   DB_NAME = 'online_shop'   DB_USER = 'root'   DB_PASS = ''
+      COOKIE_SECURE = false
+   Bika (Ctrl+S).
+
+5) Genzura: fungura  http://localhost/online_shop/check.php   (byose bigomba kuvuga OK)
+   Hanyuma fungura  http://localhost/online_shop/diag.html   (imirongo y'icyatsi gusa)
+   Nimara kureba, SIBA dosiye check.php.
+
+6) Koresha:
+      Iduka (abakiriya):   http://localhost/online_shop/
+      Admin:               http://localhost/online_shop/admin      (cyangwa /admin.html)
+   Ubwa mbere muri admin ukora konti, ukabika KODE YO KUGARURA igaragara rimwe gusa.
+
+IBYO UTAGOMBA GUKORA
+ - Ntugafungure index.html cyangwa admin.html uyikanze kabiri (file://). Ugomba gukoresha  http://localhost/online_shop/
+ - Ntugakoreshe ububiko bwa "python" (ni ubw'abakoresha Python, si XAMPP).
+
+BIRAGUSHYIRA MU BIKORWA
+ - MoMo Pay code, nimero ya WhatsApp, igiciro cyo kugeza: hindura muri  js/app.js  (shaka "SHOP").
+ - Niba database yawe ari iya kera: winjize migration_security.sql na migration_transactions.sql muri phpMyAdmin.
+
+NIBA HARI IKIBAZO
+ Fungura  http://localhost/online_shop/diag.html  — ikubwira umurongo utukura n'icyo gukora. Hanyuma ubwire amakuru.
+ Ibisobanuro birambuye: README-PHP.md

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#0F5C4D">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="author" content="Dominique Xavier">
+<title>FRANCOIS SHOES & CLOTHES 
+  
+  
+  
+  
+  
+  — Imyenda n'Inkweto</title>
+<meta name="description" content="FRANCOIS SHOES & CLOTHES — Imyenda n'Inkweto byiza, kubiciro byiza. Tumiza kuri WhatsApp cyangwa MoMo.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wm" aria-hidden="true"></div>
+<noscript><div class="boot">JavaScript igomba gukora kugira ngo urubuga rukore.</div></noscript>
+<div class="bonus" id="bonus" hidden role="region" aria-label="Bonus"></div>
+<div class="promo" id="promo"></div>
+
+
+
+<header><div class="wrap bar">
+  <a class="logo" href="#home" data-nav="home">
+    <img src="images/logo.png" alt="Profile" style="width:20%; height:30%; border-radius:60px; object-fit:cover; background:#fff; border:2px solid #FFD700;">
+  <span class="logo-text">FRANCOIS SHOES &amp; CLOTHES STORE<b>.</b></span>
+
+  </a>
+  
+  <nav class="nav" id="nav">
+    <a href="#home" class="nav-link on" data-nav="home" data-i18n="navHome">HOME</a>
+    <a href="#about" class="nav-link" data-nav="about" data-i18n="navAbout">ABOUT</a>
+    <a href="#contact" class="nav-link" data-nav="contact" data-i18n="navContact">CONTACT</a>
+  </nav>
+  <select class="ib" id="lg" aria-label="Language"><option value="rw">RW</option><option value="en">EN</option><option value="fr">FR</option></select>
+  <button class="ib" id="tb" aria-label="Theme">◐</button>
+  <button class="ib" id="cb">🛍 <span data-i18n="cart"></span> <span class="n" id="cn">0</span></button>
+</div></header>
+
+<main class="wrap">
+  <div class="page" id="page-home">
+    <section class="hero" id="home">
+      <div class="l"><h1 data-i18n="h1"></h1><p data-i18n="hp"></p><button class="cta" id="cta" data-i18n="cta"></button></div>
+      <div class="r" style="overflow:hidden; padding:0; display:flex; align-items:center; justify-content:center; background:transparent; border:none;">
+        <img src="images/home.png" alt="FRANCOIS SHOES & CLOTHES" style="width:100%; height:auto; object-fit:contain; transform:scale(1.05); filter: drop-shadow(0 10px 10px rgba(0,0,0,0.15));">
+      </div>
+    </section>
+    <section class="trust" aria-label="Benefits"><div><span>🔒</span><b data-i18n="trust1"></b></div><div><span>🚚</span><b data-i18n="trust2"></b></div><div><span>💬</span><b data-i18n="trust3"></b></div></section>
+
+    <div class="tools">
+      <div class="chips" id="chips"></div>
+      <input id="q" type="search" data-i18n-ph="search" data-i18n-aria="search">
+      <select id="so" data-i18n-aria="sort"><option value="" data-i18n="sort"></option><option value="a" data-i18n="sa"></option><option value="d" data-i18n="sd"></option></select>
+    </div>
+    <section class="grid" id="grid"></section>
+    
+    <div style="display:flex; gap:10px; justify-content:center; margin:22px 0; flex-wrap:wrap;">
+      <button class="btn o" id="more" style="max-width:200px" hidden data-i18n="more">Reba ibindi</button>
+      <button class="btn o" id="less" style="max-width:200px" hidden>⬆️ Hisha ibyongeweho</button>
+    </div>
+  </div>
+
+  <div class="page" id="page-about" hidden>
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about-inner">
+        <span class="about-badge" data-i18n="aboutBadge">Abo turi bo</span>
+        <h2 id="about-title" data-i18n="aboutTitle">Aho dukorera n'uburyo dukoramo</h2>
+        <p class="about-lead" id="about-text"></p>
+        <div class="about-grid">
+          <div class="about-card"><span class="about-ico">📍</span><h3 data-i18n="aboutLocT">Aho dukorera</h3><p id="about-loc"></p></div>
+          <div class="about-card"><span class="about-ico">🕒</span><h3 data-i18n="aboutHoursT">Amasaha y'akazi</h3><p id="about-hours"></p></div>
+          <div class="about-card"><span class="about-ico">🚚</span><h3 data-i18n="aboutDelT">Uburyo bwo kugeza</h3><p id="about-del"></p></div>
+          <div class="about-card"><span class="about-ico">📞</span><h3 data-i18n="aboutContactT">Twandikire</h3><p id="about-contact"></p></div>
+        </div>
+        <div class="about-steps">
+          <h3 data-i18n="aboutHowT">Uburyo dukoramo</h3>
+          <ol>
+            <li data-i18n="aboutStep1"></li>
+            <li data-i18n="aboutStep2"></li>
+            <li data-i18n="aboutStep3"></li>
+            <li data-i18n="aboutStep4"></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="page" id="page-contact" hidden>
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="contact-inner">
+        <span class="contact-badge" data-i18n="contactBadge">Twandikire</span>
+        <h2 id="contact-title" data-i18n="contactTitle">Turi hafi yawe</h2>
+        <p class="contact-lead" data-i18n="contactLead">Duhamagare, utwandikire kuri WhatsApp, cyangwa udusure ku iduka.</p>
+        <div class="contact-grid">
+          <a class="contact-card" id="c-wa" href="#" target="_blank" rel="noopener">
+            <span class="contact-ico">💬</span>
+            <h3 data-i18n="contactWa">WhatsApp</h3>
+            <p id="c-wa-text">+250 784 292 599</p>
+          </a>
+          <a class="contact-card" id="c-tel" href="#">
+            <span class="contact-ico">📞</span>
+            <h3 data-i18n="contactCall">Duhamagare</h3>
+            <p id="c-tel-text">+250 784 292 599</p>
+          </a>
+          <a class="contact-card" id="c-mail" href="#">
+            <span class="contact-ico">✉️</span>
+            <h3 data-i18n="contactEmail">Email</h3>
+            <p id="c-mail-text">niyogisubizofrancais@gmail.com</p>
+          </a>
+          <div class="contact-card">
+            <span class="contact-ico">📍</span>
+            <h3 data-i18n="contactAddr">Aho duherereye</h3>
+            <p id="c-addr">Kigali, Nyarugenge — DOWTOWN_house</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer><div class="wrap"><div id="ft"></div><small id="cr" style="display:block;margin-top:8px"></small></div></footer>
+
+<dialog id="dlg"><div class="pd" id="pd"></div></dialog>
+<div class="ov" id="ov"></div>
+
+<aside class="drawer" id="dr" aria-label="Cart">
+  <div class="dh"><h2 data-i18n="cartT"></h2><button class="ib" id="dc" aria-label="Close">✕</button></div>
+  <div class="db">
+    <div id="cempty"><p style="color:var(--mute)" data-i18n="empty"></p><button class="btn o" id="cont" data-i18n="cont"></button></div>
+    <div id="cfull" hidden>
+      <div id="citems"></div>
+      <div class="f">
+        <input id="nm" data-i18n-ph="name" autocomplete="name">
+        <input id="ph" type="tel" data-i18n-ph="phone" autocomplete="tel">
+        <select id="md">
+          <option value="kgl" id="optk"></option>
+          <option value="out" id="optout"></option>
+          <option value="pick" data-i18n="optPick"></option>
+        </select>
+        <input id="ad" data-i18n-ph="addr">
+      </div>
+      <div><div class="row"><span data-i18n="items"></span><span id="sb"></span></div><div class="row"><span data-i18n="ship"></span><span id="sh"></span></div><div class="row tot"><span data-i18n="total"></span><span id="tt"></span></div></div>
+
+      <div class="momo">
+        <h3 data-i18n="momoT">💳 Uburyo bwo kwishyura</h3>
+
+        <div class="pay-step">
+          <span class="pay-num">1</span>
+          <div style="flex:1">
+            <b data-i18n="payStep2">Hitamo uburyo bwo kwishyura</b>
+            <div class="pay-choice" id="pay-choice">
+              <button type="button" class="pay-opt" data-method="mm" aria-pressed="false">
+                📱 <span data-i18n="mobileMoney">Mobile Money</span>
+              </button>
+              <button type="button" class="pay-opt" data-method="mp" aria-pressed="false">
+                💳 <span data-i18n="momoPay">MoMo Pay</span>
+              </button>
+            </div>
+            <small style="display:block;margin-top:8px;color:hsl(180, 11%, 4%);font-size:11px;line-height:1.4" data-i18n="payNote">
+              📱 Kuri mobile: kanda → dialer ifunguka na code · 💻 Kuri computer: koporora code ukoreshe telefoni
+            </small>
+          </div>
+        </div>
+
+        <div class="pay-step" id="pay-code-step" hidden>
+          <span class="pay-num">2</span>
+          <div style="flex:1">
+            <b data-i18n="payStep1">Kopiya code y'ubwishyu</b>
+            <div class="code" id="uc"></div>
+            <div id="pay-name" style="margin-top:8px;padding:10px;background:rgba(255,255,255,.12);border-radius:10px;font-size:13px;color:#fff">
+              <small style="opacity:.8;display:block;margin-bottom:2px" data-i18n="payToName">Wishyura kuri:</small>
+              <b style="font-size:15px;color:#0e0e0b">NIYOGISUBIZO François</b>
+            </div>
+            <button type="button" class="btn o" id="cp" style="margin-top:6px">
+              <span data-i18n="copyCode">📋 Kopiya code</span>
+            </button>
+            <a class="btn g" id="tel" href="#" style="display:block;text-align:center;margin-top:8px">
+              📞 <span data-i18n="payOnPhone">Kwishyura kuri telefoni</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="pay-step" id="pay-tx-step" hidden>
+          <span class="pay-num">3</span>
+          <div style="flex:1">
+            <b data-i18n="payStep3">Injiza Transaction ID (ubonye kuri SMS)</b>
+            <input id="tx" class="f" style="height:46px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(252, 252, 252, 0.973);color:#131310;padding:0 14px;width:100%;margin-top:6px" data-i18n-ph="txn" placeholder="Transaction ID">
+          </div>
+        </div>
+
+        <div id="pay-warn" style="margin-top:12px;padding:10px;background:rgba(103, 88, 3, 0.516);border-radius:10px;font-size:12px;color:hsl(49, 27%, 92%)" data-i18n="payWarn" hidden>
+          ⚠️ Ushyira "Tumiza" gusa nyuma yo kwishyura no kubona Transaction ID.
+        </div>
+      </div>
+
+      <button class="btn g" id="ord" disabled data-i18n="order">📤 Ohereza itegeko kuri WhatsApp</button>
+      <p id="er" style="font-size:13px;color:var(--mute)" data-i18n="fill"></p>
+    </div>
+  </div>
+</aside>
+
+<button class="chb" id="chb" aria-label="Chat">💬 <span data-i18n="chat"></span></button>
+<section class="chp" id="chp" aria-label="Chat">
+  <div class="chh" style="display:flex; align-items:center; gap:10px;">
+    <img src="images/logo.png" alt="Profile" style="width:36px; height:36px; border-radius:50%; object-fit:cover; background:#fff; border:2px solid #FFD700;">
+    <b data-i18n="chatT" style="flex:1;"></b>
+    <button id="chx" aria-label="Close" style="background:none; border:none; color:inherit; font-size:18px; cursor:pointer;">✕</button>
+  </div>
+  <form id="cs" class="cst"><p data-i18n="chatIntro"></p>
+    <input id="cn2" data-i18n-ph="name" required><input id="cph" type="tel" data-i18n-ph="chatPh"><input id="cprod" data-i18n-ph="chatProd">
+    <button class="btn" data-i18n="chatGo"></button></form>
+  <div id="ct" hidden><div id="cl" class="cl"><div class="cm a" id="cgr"></div></div>
+    <form id="cf" class="cfm">
+      <label for="cimg" title="Ohereza ifoto" style="cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 10px;border-radius:12px;border:1px solid var(--line);background:var(--card);height:46px;min-width:46px">📷</label>
+      <input id="cimg" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+      <input id="ci" data-i18n-ph="msgPh" autocomplete="off">
+      <button aria-label="Send">➤</button>
+    </form></div>
+</section>
+
+<a class="" target="_blank" rel="noopener"><span class="long">Designed &amp; built by </span>Dominique Xavier</a>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

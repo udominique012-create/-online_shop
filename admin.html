@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — FRANCOIS SHOES&clothes STORE</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="wm" aria-hidden="true"></div>
+<div id="boot" class="boot">Birimo gutangira… Niba ibi bigumyeho, JavaScript ntikora cyangwa dosiye ntizabonetse: kanda Ctrl+F5, hanyuma ufungure <a href="diag.html">diag.html</a> urebe impamvu.</div>
+<noscript><div class="boot">JavaScript igomba gukora kugira ngo urubuga rukore.</div></noscript>
+
+<main class="ad">
+<div class="authbrand" id="authbrand">
+  <img src="images/log.png" alt="Logo" style="width:90px; height:80px; border-radius:10px; object-fit:cover; box-shadow:var(--sh);">
+  <div>
+    <b>FRANCOIS SHOES&CLOTHES STORES</b>
+    <small>Admin panel</small>
+  </div>
+</div>
+
+<section id="bootfail" hidden>
+  <h2>Admin ntishoboye gutangira</h2>
+  <p id="bfmsg"></p>
+  <p class="note">Fungura <a href="diag.html">diag.html</a> ubone impamvu, ukurikize ibyo ivuga.</p>
+</section>
+
+<!-- INJIRA / SETUP -->
+<section id="login" hidden>
+  <h2 id="lt"></h2>
+  <form id="lf">
+    <input id="lu" placeholder="Izina" autocomplete="username" required>
+    <input id="leml" type="email" placeholder="Email" autocomplete="email">
+    <input id="lph" type="tel" placeholder="Telefoni (urugero +2507XXXXXXXX)" autocomplete="tel">
+    <input id="lp" type="password" placeholder="Ijambobanga (nibura inyuguti 8)" autocomplete="current-password" required>
+    <button id="lb"></button>
+    <p id="le"></p><p class="note" id="lnote"></p>
+  </form>
+  <p class="note"><a href="#" id="forgot" hidden>Wibagiwe ijambobanga?</a></p>
+</section>
+
+<!-- RECOVERY -->
+<section id="recover" hidden>
+  <h2>Garura ijambobanga</h2>
+  <p class="note">Andika email cyangwa telefoni yawe, uhitemo uburyo bwo kubona kode.</p>
+  <form id="rcf">
+    <input id="ru" placeholder="Email cyangwa telefoni" required autocomplete="username">
+    <select id="rch" aria-label="Uburyo bwo kohereza">
+      <option id="rch-opt-e" value="e">Ohereza link kuri email</option>
+      <option id="rch-opt-p" value="p">Ohereza OTP kuri telefoni</option>
+    </select>
+    <button>Ohereza kode</button>
+    <a href="#" id="rback">Subira inyuma</a>
+    <p id="re"></p>
+  </form>
+</section>
+
+<!-- RESET -->
+<section id="reset" hidden>
+  <h2>Hindura ijambobanga</h2>
+  <p class="note">Injiza OTP (iyo ari telefoni) cyangwa ukoreshe link ya email.</p>
+  <form id="rsf">
+    <input id="rst" placeholder="OTP (imibare 6)" maxlength="6" autocomplete="one-time-code">
+    <input id="rsp" type="password" placeholder="Ijambobanga rishya (nibura inyuguti 8)" required autocomplete="new-password">
+    <button>Hindura ijambobanga</button>
+    <p id="rse"></p>
+  </form>
+</section>
+
+<!-- KODE Y'AGACE -->
+<section id="rshow" hidden>
+  <h2>Bika kode yawe yo kugarura</h2>
+  <p class="note">Iyi kode igaragara <b>rimwe gusa</b>. Yibike ahantu hizewe.</p>
+  <div class="rcode" id="rcode"></div>
+  <button type="button" id="rcopy">Kopiya</button>
+  <label><input type="checkbox" id="rok" style="width:auto"> Nayibitse neza</label>
+  <button type="button" id="rgo" disabled>Komeza</button>
+</section>
+
+<!-- DASHBOARD -->
+<div id="dash" hidden>
+  <div class="top">
+    <span class="brand" style="display:flex; align-items:center; gap:10px;">
+      <img src="images/log.png">
+      FRANCOIS SHOES&CLOTHES STORE 
+    </span>
+    <span style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a class="btnlink" href="./" target="_blank" rel="noopener" id="store-link">Reba iduka ↗</a>
+      <button class="t" id="notif">Emerera amatangazo</button>
+      <button class="t" id="atb" aria-label="Theme" style="font-size:18px;padding:8px 12px," title="Hindura ijoro / umunsi">◐</button>
+      <button class="t" id="out">Sohoka</button>
+    </span>
+  </div>
+
+  <nav class="anav" id="anav">
+    <a href="#" class="anav-link on" data-anav="dashboard">🏠 DASHBOARD</a>
+    <a href="#" class="anav-link" data-anav="about">ℹ️ ABOUT</a>
+    <a href="#" class="anav-link" data-anav="contact">📞 CONTACT</a>
+    <a href="#" class="anav-link" data-anav="account">🔐 KONTI</a>
+  </nav>
+
+  <div id="tabs">
+    <button class="t on" data-tab="dashboard">Dashboard</button>
+    <button class="t" data-tab="products">Ibicuruzwa</button>
+    <button class="t" data-tab="promo">Bonus</button>
+    <button class="t" data-tab="orders">Amatumizwa <span class="bd" id="bord" hidden></span></button>
+    <button class="t" data-tab="tx">Transaction <span class="bd" id="btx" hidden></span></button>
+    <select id="alg" class="t" style="margin-left:auto;max-width:130px;background:hwb(65 2% 9% / 0.557);color:var(--ink);font-weight:600;border:0;padding:10px 12px;border-radius:10px;cursor:pointer">
+      <option value="rw">RW</option><option value="en">EN</option><option value="fr">FR</option>
+    </select>
+  </div>
+
+  <section id="p-dashboard">
+    <h2>Dashboard</h2>
+    <div class="stats" id="stats">
+      <div class="stat"><small>Ibicuruzwa:</small><b id="st-prod">0</b></div>
+      <div class="stat"><small>Abakiriya:</small><b id="st-chat">0</b></div>
+      <div class="stat"><small>Amafaranga uyu munsi:</small><b id="st-today">0 RWF</b></div>
+      <div class="stat"><small>Amatumizwa mashya:</small><b id="st-new">0</b></div>
+    </div>
+
+    <hr style="margin:20px 0;border:0;border-top:1px solid var(--line)">
+
+    <h2>Ibiganiro n'abakiriya</h2>
+    <div class="chat">
+      <div class="cl" id="clist"><small>Nta kiganiro kirahari.</small></div>
+      <div>
+        <div id="th"><small>Hitamo umukiriya ibumoso.</small></div>
+        <div class="msgs" id="msgs" hidden></div>
+        <form class="rf" id="rf" hidden>
+          <label for="aimg" title="Ohereza ifoto" style="cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 12px;border-radius:10px;border:1px solid #E3E7EE;background:#EEF1F5;height:46px">📷</label>
+          <input id="aimg" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+          <input id="rb" placeholder="Subiza umukiriya…" autocomplete="off">
+          <button>Ohereza</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div id="p-products" hidden>
+    <section>
+      <h2 id="ptitle">Ongeramo igicuruzwa</h2>
+      <form id="pf">
+        <input id="pn" placeholder="Izina ry'igicuruzwa" maxlength="150" required>
+        <div class="grid2">
+          <select id="pc"><option>Imyenda</option><option>Inkweto</option></select>
+          <select id="pt">
+            <option value="shirt">Umupira/Ishati</option>
+            <option value="dress">Ikanzu</option>
+            <option value="pants">Ipantaro</option>
+            <option value="jacket">Ikoti</option>
+            <option value="shoe">Inkweto</option>
+            <option value="boot">Boots</option>
+          </select>
+          <input id="pp" type="number" min="1" placeholder="Igiciro (RWF)" required>
+          <input id="po" type="number" min="0" placeholder="Igiciro cya kera (si ngombwa)">
+          <input id="ps" placeholder="Ingano: S,M,L cyangwa 40,41,42" required>
+          <input id="pv" placeholder="Amabara (nka: Umukara,Umweru)" maxlength="255">
+          <input id="pb" placeholder="Akarango (urugero Bishya)" maxlength="30">
+        </div>
+        <label><small>Ifoto (jpg/png/webp)</small><input id="pimg" type="file" accept="image/jpeg,image/png,image/webp"></label><div id="iprev"></div>
+        <label><small>Video (mp4/webm — ngufi)</small><input id="pvid" type="file" accept="video/mp4,video/webm"></label><div id="vprev"></div>
+        <small id="pstat"></small>
+        <div><small>Amabara y'ishusho: </small><input id="pcol" type="color" value="#d6246e" style="width:60px"> <input id="pbg" type="color" value="#ffe3ef" style="width:60px"></div>
+        <button id="psave">Shyiraho</button> <button type="button" class="t" id="pcancel" hidden>Reka</button><p id="pmsg"></p>
+      </form>
+      <details><summary>Shyiramo ibicuruzwa byinshi icyarimwe (CSV)</summary>
+        <p><small>Buri murongo: <code>izina,icyiciro,ubwoko,igiciro,igiciro_cya_kera,ingano,akarango</code></small></p>
+        <input id="csv" type="file" accept=".csv,text/csv"><p id="cmsg"></p>
+      </details>
+    </section>
+    <section>
+      <h2>Ibicuruzwa (<span id="ptot">0</span>)</h2>
+      <input id="psearch" placeholder="Shakisha…"><div id="plist"></div>
+      <div class="pgn"><button class="t" id="pprev">←</button><span id="pinfo"></span><button class="t" id="pnext">→</button></div>
+    </section>
+  </div>
+
+  <section id="p-promo" hidden>
+    <h2>Itangazo rya Bonus</h2>
+    <form id="af"><input id="at" maxlength="200" placeholder="BONUS: Ugura 2 ubone 1 ku buntu…" required><button>Shyiraho</button></form><div id="alist"></div>
+  </section>
+
+  <section id="p-tx" hidden>
+    <h2>Transaction — ubwishyu bwa MoMo</h2>
+    <div class="cards" id="tx-cards"></div>
+    <div class="grid2">
+      <select id="txs" aria-label="Imiterere"><option value="all">Byose</option><option value="yishyuwe">Byishyuwe</option><option value="itegereje">Bitegereje</option><option value="yanzwe">Byanzwe</option></select>
+      <select id="txr" aria-label="Igihe"><option value="all">Igihe cyose</option><option value="today">Uyu munsi</option><option value="7">Iminsi 7</option><option value="30">Iminsi 30</option></select>
+    </div>
+    <div class="row" style="border:0"><b>Ibitumizwa</b><button class="t" id="txcsv" type="button">Kuramo CSV (Excel)</button></div>
+    <div id="tx-list"></div>
+    <h2 style="margin-top:22px">Ibicuruzwa byishyuwe</h2><div id="tx-prod"></div>
+  </section>
+
+  <section id="p-orders" hidden><h2>Ibitumizwa</h2><div id="olist"></div></section>
+
+  <section id="p-about" hidden>
+    <h2>About — Ubusobanuro burambuye bwa website</h2>
+    <p class="note">Aya makuru agaragara kuri website mu gice cya "About".</p>
+    <form id="sf">
+      <label><small>Aho dukorera</small><textarea id="s-loc" rows="2" placeholder="Kigali, Nyarugenge — KN 12 Ave"></textarea></label>
+      <label><small>Amasaha y'akazi</small><textarea id="s-hours" rows="2" placeholder="Kuwa mbere – Kuwa gatandatu: 08:00 – 20:00"></textarea></label>
+      <label><small>Uburyo bwo kugeza</small><textarea id="s-del" rows="2" placeholder="I Kigali ni ubuntu · Hanze: 2,500 RWF"></textarea></label>
+      <label><small>Twandikire</small><textarea id="s-contact" rows="2" placeholder="WhatsApp: +250 780 000 000"></textarea></label>
+      <label><small>Inyandiko "About"</small><textarea id="s-text" rows="4" placeholder="Online Shop ni iduka…"></textarea></label>
+      <button id="ssave">Bika</button><p id="smsg"></p>
+    </form>
+    <hr style="margin:28px 0;border:0;border-top:1px solid var(--line)">
+    <h2>Preview — uko umukiriya abona "About"</h2>
+    <div class="about" style="margin:0">
+      <div class="about-inner">
+        <span class="about-badge">Abo turi bo</span>
+        <h2>Aho dukorera n'uburyo dukoramo</h2>
+        <p class="about-lead" id="prev-text"></p>
+        <div class="about-grid">
+          <div class="about-card"><span class="about-ico">📍</span><h3>Aho dukorera</h3><p id="prev-loc"></p></div>
+          <div class="about-card"><span class="about-ico">🕒</span><h3>Amasaha y'akazi</h3><p id="prev-hours"></p></div>
+          <div class="about-card"><span class="about-ico">🚚</span><h3>Uburyo bwo kugeza</h3><p id="prev-del"></p></div>
+          <div class="about-card"><span class="about-ico">📞</span><h3>Twandikire</h3><p id="prev-contact"></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="p-contact" hidden>
+    <h2>Contact — Aho wahamagara</h2>
+    <p class="note">Email na telefoni yawe — kugira ngo umukiriya akumenye.</p>
+    <form id="acf" style="margin-top:12px">
+      <h3 style="font:800 17px 'Plus Jakarta Sans',Inter,sans-serif;margin:0 0 8px">Email na telefoni</h3>
+      <input id="aceml" type="email" placeholder="Email" autocomplete="email" required>
+      <input id="acph" type="tel" placeholder="Telefoni (+2507XXXXXXXX)" autocomplete="tel" required>
+      <button>Bika email na telefoni</button><p id="acm"></p>
+    </form>
+  </section>
+
+  <section id="p-account" hidden>
+    <h2>Konti n'umutekano</h2>
+    <form id="af2">
+      <input id="ao" type="password" placeholder="Ijambobanga rya none" required autocomplete="current-password">
+      <input id="an" type="password" placeholder="Ijambobanga rishya (si ngombwa)" autocomplete="new-password">
+      <label><input id="ar" type="checkbox" style="width:auto"> Kora kode nshya yo kugarura</label>
+      <button>Bika</button><p id="am"></p>
+    </form>
+    <div id="acode" hidden><p class="note">Kode yawe nshya (igaragara rimwe gusa):</p><div class="rcode"><b></b></div></div>
+    <p class="note" style="margin-top:18px">Session irangira nyuma y'iminota 30 udakoze, cyangwa amasaha 8 yose hamwe.</p>
+  </section>
+</div>
+</main>
+
+<a class="made"  target="_blank" rel="noopener"><span class="long">Designed &amp; built by </span>Dominique Xavier</a>
+<script src="js/admin.js"></script>
+</body>
+</html>
